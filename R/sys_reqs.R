@@ -1,10 +1,16 @@
-
-library(desc)
-require(gtools)
-
-sys_reqs <- function(pkg) {
+#' Print SystemRequirements
+#'
+#' This function prints the SystemRequirements string of the input package's
+#' dependencies.
+#'
+#' @param pkg CRAN Package name string
+#' @return NULL
+#' @export
+sys_reqs <- function(pkg){
   pkgs <- gtools::getDependencies(pkg)
   dir.create('check-a78g4')
+
+  #todo: use tempdir() instead!!
 
   message('Finding dependencies...')
   d <- download.packages(pkgs, 'check-a78g4', quiet = T)[,2]
@@ -38,6 +44,8 @@ sys_reqs <- function(pkg) {
   tmp <- sapply(out, message)
 
   unlink('check-a78g4', recursive = T)
+
+  return(NULL)
 }
 
 
